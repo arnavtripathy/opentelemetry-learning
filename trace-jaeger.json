@@ -1,0 +1,69 @@
+{
+    "data": [
+      {
+        "traceID": "d26c093ca6313ef21aa160dd28096f95",
+        "spans": [
+          {
+            "traceID": "d26c093ca6313ef21aa160dd28096f95",
+            "spanID": "7f5ff253f77b77ef",
+            "operationName": "multiply",
+            "references": [
+              {
+                "refType": "CHILD_OF",
+                "traceID": "d26c093ca6313ef21aa160dd28096f95",
+                "spanID": "4773a9670f39eddd"
+              }
+            ],
+            "startTime": 1701545208096729,
+            "duration": 16,
+            "tags": [
+              {
+                "key": "status.code",
+                "type": "string",
+                "value": "UNSET"
+              }
+            ],
+            "processID": "p1"
+          },
+          {
+            "traceID": "d26c093ca6313ef21aa160dd28096f95",
+            "spanID": "4773a9670f39eddd",
+            "operationName": "add",
+            "references": [],
+            "startTime": 1701545208096670,
+            "duration": 96,
+            "tags": [
+              {
+                "key": "status.code",
+                "type": "string",
+                "value": "UNSET"
+              }
+            ],
+            "processID": "p1"
+          }
+        ],
+        "processes": {
+          "p1": {
+            "serviceName": "unknown_service",
+            "tags": [
+              {
+                "key": "telemetry.sdk.language",
+                "type": "string",
+                "value": "python"
+              },
+              {
+                "key": "telemetry.sdk.name",
+                "type": "string",
+                "value": "opentelemetry"
+              },
+              {
+                "key": "telemetry.sdk.version",
+                "type": "string",
+                "value": "1.28.2"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
