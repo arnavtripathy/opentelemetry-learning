@@ -2,26 +2,29 @@ receivers:
   otlp:
     protocols:
       grpc:
+        endpoint: 0.0.0.0:4317
       http:
+        endpoint: 0.0.0.0:4318
 
 exporters:
-  jaeger:
-    endpoint: "http://jaeger:14268/api/traces"
+
+#No native jaeger exporter so have to send it to Jeager oltp port only
+  otlp:
+    endpoint: "jaeger:4317"  # Use GRPC endpoint for Jaeger
+    tls:
+      insecure: true
 
   prometheus:
     endpoint: "0.0.0.0:9464"  # Prometheus scrape endpoint
-
-  logging:  # For debugging metrics and traces
-    loglevel: debug
 
 service:
   pipelines:
     traces:
       receivers: [otlp]
       processors: []
-      exporters: [jaeger]
+      exporters: [otlp]
 
     metrics:
       receivers: [otlp]
       processors: []
-      exporters: [prometheus, logging]
+      exporters: [prometheus]

@@ -1,27 +1,8 @@
 version: "3.7"
 
 services:
-  app:
-    image: python:3.9
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./myapp:/app
-    working_dir: /app
-    environment:
-      OTEL_SERVICE_NAME: "my-python-app"
-      OTEL_TRACES_EXPORTER: "otlp"
-      OTEL_METRICS_EXPORTER: "otlp"
-      OTEL_EXPORTER_OTLP_ENDPOINT: "http://localhost:4317"
-      OTEL_LOG_LEVEL: "debug"
-    command: >
-      sh -c "pip install opentelemetry-sdk opentelemetry-exporter-otlp opentelemetry-instrumentation &&
-             opentelemetry-instrument python3 myapp.py"
-    depends_on:
-      - collector
-
   collector:
-    image: otel/opentelemetry-collector:latest
+    image: otel/opentelemetry-collector-contrib:latest
     ports:
       - "4317:4317"   # OTLP endpoint for traces and metrics
       - "55681:55681" # Collector debugging interface
@@ -35,7 +16,7 @@ services:
     image: jaegertracing/all-in-one:latest
     ports:
       - "16686:16686"  # Jaeger UI
-      - "14268:14268"  # Jaeger Traces
+      - "14250:14250"  # Jaeger Traces
 
   prometheus:
     image: prom/prometheus:latest

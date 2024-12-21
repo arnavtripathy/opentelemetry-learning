@@ -1,4 +1,11 @@
 #docker command - docker run -d -p 4317:4317 -p 16686:16686 --name jaeger jaegertracing/all-in-one:latest
+
+# export OTEL_SERVICE_NAME="my-python-app"  # Name of your service
+# export OTEL_TRACES_EXPORTER="otlp"       # Use OTLP protocol to send traces
+# export OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4317"  # OTLP endpoint for Jaeger
+# export OTEL_LOG_LEVEL="debug"            # Optional: Set log level for debugging
+# export OTEL_PYTHON_DISABLED_INSTRUMENTATIONS="" # Optional: List libraries to disable instrumentation
+
 from flask import Flask, request, jsonify
 import requests
 import time
